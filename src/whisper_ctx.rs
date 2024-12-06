@@ -28,6 +28,7 @@ impl WhisperInnerContext {
         path: &str,
         parameters: WhisperContextParameters,
     ) -> Result<Self, WhisperError> {
+        println!("Creating WhisperContext from file: {}", path);
         let path_cstr = CString::new(path)?;
         let ctx = unsafe {
             whisper_rs_sys::whisper_init_from_file_with_params_no_state(
