@@ -418,9 +418,11 @@ impl WhisperContext {
     pub fn create_state(&self) -> Result<WhisperState, WhisperError> {
         let state = unsafe { whisper_rs_sys::whisper_init_state(self.ctx.ctx) };
         if state.is_null() {
+            println!("State creation failed");
             Err(WhisperError::InitError)
         } else {
             // SAFETY: this is known to be a valid pointer to a `whisper_state` struct
+            println!("State created");
             Ok(WhisperState::new(self.ctx.clone(), state))
         }
     }
